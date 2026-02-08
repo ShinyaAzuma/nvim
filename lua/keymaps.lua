@@ -1,36 +1,46 @@
 local map = vim.api.nvim_set_keymap
--- move window
-map('n', '<Leader>j', '<C-w>j', { noremap = true, silent = true })
-map('n', '<Leader>k', '<C-w>k', { noremap = true, silent = true })
-map('n', '<Leader>l', '<C-w>l', { noremap = true, silent = true })
-map('n', '<Leader>h', '<C-w>h', { noremap = true, silent = true })
+local opts = { noremap = true, silent = true }
 
--- split window
-map('n', '<Leader>s', ':sp\n', { noremap = true })
-map('n', '<Leader>v', ':vs\n', { noremap = true })
+-- Split window
+map('n', 'ss', ':split<CR>', opts)
+map('n', 'sv', ':vsplit<CR>', opts)
 
--- close window
-map('n', '<Leader>w', ':w\n', { noremap = true })
-map('n', '<Leader>q', ':q\n', { noremap = true })
-map('n', '<Leader>wq', ':wq\n', { noremap = true })
+-- Move window
+map('n', 'sh', '<C-w>h', opts)
+map('n', 'sj', '<C-w>j', opts)
+map('n', 'sk', '<C-w>k', opts)
+map('n', 'sl', '<C-w>l', opts)
 
--- open terminal
-map('n', '<Leader>tt', ':terminal\n', { noremap = true })
+-- Resize window
+map('n', '<C-w><Left>', '<C-w><', opts)
+map('n', '<C-w><Right>', '<C-w>>', opts)
+map('n', '<C-w><Up>', '<C-w>+', opts)
+map('n', '<C-w><Down>', '<C-w>-', opts)
 
-map('i', '<C-k>', '<Up>', {})
-map('i', '<C-j>', '<Down>', {})
-map('i', '<C-h>', '<Left>', {})
-map('i', '<C-l>', '<Right>', {})
+-- Tabs
+map('n', '<S-Tab>', ':tabprev<CR>', opts)
+map('n', '<Tab>', ':tabnext<CR>', opts)
+map('n', 'te', ':tabedit<CR>', opts)
 
--- show diagnostics
-map('n', '<Leader>d', ':lua vim.diagnostic.open_float()<CR>', { noremap = true })
+-- Close window
+map('n', '<Leader>w', ':w<CR>', opts)
+map('n', '<Leader>q', ':q<CR>', opts)
+map('n', '<Leader>wq', ':wq<CR>', opts)
 
--- rebind embeded command
+-- Terminal
+map('n', '<Leader>tv', ':vs | terminal<CR>', opts)
+map('n', '<Leader>ts', ':belowright sp | terminal<CR>', opts)
+map('t', '<Esc>', '<C-\\><C-n>', opts)
+
+-- Diagnostics
+map('n', '<Leader>d', ':lua vim.diagnostic.open_float()<CR>', opts)
+
+-- Comment toggle
 map('n', '<C-_>', 'gcc', { noremap = false })
 map('v', '<C-_>', 'gc', { noremap = false })
 
-map('n', '<Leader>tv', ':vs | terminal<CR>', { noremap = true })
--- 下側にターミナルを開く
-map('n', '<Leader>ts', ':belowright sp | terminal<CR>', { noremap = true })
+-- Select all
+map('n', '<C-a>', 'gg<S-v>G', opts)
 
-map('t', '<Esc>', '<C-\\><C-n>', {noremap = true})
+-- oil.nvimで開く
+map('n', '<Leader>e', '<cmd>Oil<cr>', opts)

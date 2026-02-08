@@ -23,19 +23,27 @@ vim.o.cursorline = true
 vim.o.laststatus = 3
 vim.cmd [[filetype plugin indent on]]
 
--- テーマ読み込み後にハイライト設定
-vim.api.nvim_create_autocmd("ColorScheme", {
+
+-- InsertLeaveで英数に切り替え
+vim.api.nvim_create_autocmd("InsertLeave", {
   callback = function()
-    -- 非アクティブウィンドウを暗く
-    vim.api.nvim_set_hl(0, "NormalNC", { bg = "#111111" })
-    -- ウィンドウ境界線を目立たせる
-    vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff9e64", bg = "NONE" })
-    -- カーソル行
-    vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2a3a4a" })
+    vim.fn.system("osascript -e 'tell application \"System Events\" to key code 102'")
   end,
 })
 
--- 現在のセッションにも適用
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "#111111" })
-vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#ff9e64", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2a3a4a" })
+-- FocusGainedで英数に切り替え
+vim.api.nvim_create_autocmd("FocusGained", {
+  callback = function()
+    vim.fn.system("osascript -e 'tell application \"System Events\" to key code 102'")
+  end,
+})
+
+
+-- ファイルが外部で変更されたら自動で読み込み
+vim.o.autoread = true
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  callback = function()
+    vim.cmd("checktime")
+  end,
+})

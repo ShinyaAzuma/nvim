@@ -10,6 +10,8 @@ return {
       { "<leader>p", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
       { "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
       { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Recent Projects" },
+      { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search in buffer" },
       { "sf", function()
           require("telescope").extensions.file_browser.file_browser({
             path = "%:p:h",
@@ -27,7 +29,7 @@ return {
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       local fb_actions = require("telescope").extensions.file_browser.actions
-
+      telescope.load_extension("projects")
       telescope.setup({
         defaults = {
           path_display = { "truncate" },
