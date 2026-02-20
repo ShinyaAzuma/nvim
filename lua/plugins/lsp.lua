@@ -1,11 +1,11 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
+    "saghen/blink.cmp",
   },
   config = function()
     local map = vim.keymap.set
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
 
     -- LSP接続時のキーマップ設定
     vim.api.nvim_create_autocmd("LspAttach", {

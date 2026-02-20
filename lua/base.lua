@@ -21,6 +21,8 @@ vim.o.softtabstop = 2
 vim.o.backspace = "indent,eol,start"
 vim.o.cursorline = true
 vim.o.laststatus = 3
+vim.o.scrolloff = 10
+vim.o.cmdheight = 0
 vim.cmd [[filetype plugin indent on]]
 
 
